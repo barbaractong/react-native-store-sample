@@ -1,0 +1,87 @@
+{
+    "data": {
+        "poc": {
+            "id": "532",
+            "products": [
+                {
+                    "id": "8868",
+                    "title": "Skol 269ml - Unidade",
+                    "rgb": false,
+                    "images": [
+                        {
+                            "url": "https://courier-images-codechallenge.s3-us-west-2.amazonaws.com/product/8868_205f958d-2e51-48a3-b4d5-a2998765571a.jpg"
+                        }
+                    ],
+                    "productVariants": [
+                        {
+                            "availableDate": "2018-10-31T00:00:00",
+                            "productVariantId": "8502",
+                            "price": 2.09,
+                            "inventoryItemId": "80149",
+                            "shortDescription": null,
+                            "title": "Skol 269ml - Unidade",
+                            "published": null,
+                            "volume": "0,00269",
+                            "volumeUnit": null,
+                            "description": null,
+                            "subtitle": "Cervejas",
+                            "components": []
+                        }
+                    ]
+                },
+                {
+                    "id": "8869",
+                    "title": "Skol 269ml - Pack com 15 Unidades",
+                    "rgb": false,
+                    "images": [
+                        {
+                            "url": "https://courier-images-codechallenge.s3-us-west-2.amazonaws.com/products/8503.png"
+                        }
+                    ],
+                    "productVariants": [
+                        {
+                            "availableDate": "2018-10-31T00:00:00",
+                            "productVariantId": "8503",
+                            "price": 31.35,
+                            "inventoryItemId": "80151",
+                            "shortDescription": null,
+                            "title": "Skol 269ml - Pack com 15 Unidades",
+                            "published": null,
+                            "volume": "0,04035",
+                            "volumeUnit": null,
+                            "description": null,
+                            "subtitle": "Cervejas",
+                            "components": []
+                        }
+                    ]
+                },
+                {
+                    "id": "8877",
+                    "title": "Brahma 269ml - Unidade",
+                    "rgb": false,
+                    "images": [
+                        {
+                            "url": "https://courier-images-codechallenge.s3-us-west-2.amazonaws.com/product/00008877_02c7ebe9-c23a-405c-8af8-8f0988f276c7.jpg"
+                        }
+                    ],
+                    "productVariants": [
+                        {
+                            "availableDate": "2018-10-31T00:00:00",
+                            "productVariantId": "8511",
+                            "price": 1.99,
+                            "inventoryItemId": "80139",
+                            "shortDescription": null,
+                            "title": "Brahma 269ml - Unidade",
+                            "published": null,
+                            "volume": "0,00269",
+                            "volumeUnit": null,
+                            "description": null,
+                            "subtitle": null,
+                            "components": []
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
