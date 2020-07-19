@@ -15,9 +15,17 @@ export default function App() {
     <NavigationContainer>
     <Stack.Navigator>
         <Stack.Screen 
-        name = 'products'
+        name = 'Bebidas disponíveis'
         component={Products}
-        options={{headerShown: false}}
+        options={{
+          title: 'Bebidas disponíveis',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
         />
     </Stack.Navigator>
   </NavigationContainer>

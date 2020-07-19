@@ -7,12 +7,15 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
+        justifyContent: "center"
     },
     carouselContainer: {
         marginTop: 30
     },
     productListContainer: {
+        flex: 1,
         marginTop: 20,
+        marginLeft: 10,
     },
     topContainer: {
         height: SCREEN_HEIGHT * .15,
@@ -22,7 +25,6 @@ export default StyleSheet.create({
     infoUserContainer: {
         flex: .2,
         marginLeft: 20,
-        marginTop: 20,
         alignSelf: "flex-start",
     },
     iconBackContainer: {
