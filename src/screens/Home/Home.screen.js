@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import React, { useState, useEffect, useContext } from 'react'
 import {
     View,
     Image,
-    Alert,
     Text,
     TextInput,
     Keyboard,
@@ -14,25 +16,44 @@ import {
 import styles from './Home.screen.styles';
 
 import * as getLocationCoord from '../../services/geolocation-api/getGeolocation.service';
+import AddressContext from '../../../context/AddressInput.context';
+import LocationContext from '../../../context/Location.context';
 
-export default function Home() {
+export default function Home({ navigation }) {
     const ICON_HOME = require('../../assets/images/logo_undraw.png');
 
-    const [addressInput, setAddressInput] = useState('');
+    const [addressInput, setAddressInput] = useContext(AddressContext);
+    const [geolocationLink, setGeolocationLink] = useState({ addressInfo: null });
 
     function getLocation(ADDRESS) {
         LOCATION_FROM_API = getLocationCoord.decodeUrlParameter(ADDRESS);
-        Alert.alert(LOCATION_FROM_API); // retorna link para chamada da api
+        setGeolocationLink(LOCATION_FROM_API);
     }
 
-    function getParamsLocation(URL) {   // chamar o address input aqui
-        const [responseData, setResponseData] = useState({});
+    const [responseData, setResponseData] = useState();
+    const [isLoading, setLoading] = useState(true);
 
-        fetch(URL).then((response) => response.json()).then((responseJSON) => {
-            setResponseData(responseJSON.results);
-            Alert.alert('fetch data')
-        });
-    }
+    const [coordinates, setCoordinates] = useContext(LocationContext)
+    useEffect(() => {
+        fetch(geolocationLink)
+            .then((response) => response.json())
+            .then((json) => setResponseData(json.results))
+            .then( (data) => {
+                console.log(data);
+                responseData.map((value) => {
+                    setCoordinates({
+                        address: addressInput,
+                        lat: (value.geometry.location.lat).toString(),
+                        lng: (value.geometry.location.lng).toString(),
+                        time: (new Date()).toString()
+                    })
+                })
+            })
+            .catch((error) => console.error(error))
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [responseData]);
 
     return (
         <KeyboardAvoidingView
@@ -53,9 +74,14 @@ export default function Home() {
                             <TextInput
                                 style={styles.inputAdress}
                                 placeholder="Rua Pamplona, 200, Jardim Paulista"
-                                onChangeText={(addressInput) => setAddressInput(addressInput)} />
+                                onChangeText={(addressInput) => {   // devo atualizar o addressFromUser aqui
+                                    setAddressInput(addressInput);
+                                }} />
                             <Text style={styles.subtitleInput}>Insira o seu endereço</Text>
-                            <TouchableOpacity onPress={() => getLocation(addressInput)}>
+                            <TouchableOpacity onPress={() => {
+                                getLocation(addressInput);
+                                navigation.navigate('Products')
+                            }}>
                                 <View style={styles.buttonSubmitAddress}>
                                     <Text style={styles.buttonText}>Procurar bebidas disponíveis</Text>
                                 </View>

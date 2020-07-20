@@ -5,3 +5,9 @@ export function decodeUrlParameter(add) {
 }
 
 
+export function getParamsLocation(URL) {   // chamar o address input aqui
+	fetch(URL).then((response) => response.json()).then((responseJSON) => {
+		setResponseData(responseJSON.results);
+		Alert.alert('fetch data')
+	});
+}
