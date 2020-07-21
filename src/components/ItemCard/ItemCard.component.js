@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 5,
         alignSelf: "center",
-        margin: 20
+        margin: 10
     },
 
     textView: {

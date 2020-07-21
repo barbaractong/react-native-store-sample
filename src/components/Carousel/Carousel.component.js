@@ -7,6 +7,7 @@ const { width, heigth } = Dimensions.get('window')
 let flatList
 
 const Carousel = ({ data }) => {
+    // console.disableYellowBox = true;
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState(data)
@@ -33,7 +34,7 @@ const Carousel = ({ data }) => {
                         return <CarouselItem item={item} />
                     }}
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { x: scrollX } }}]
+                        [{ nativeEvent: { contentOffset: { x: scrollX }}}]
                     )}
                 />
 

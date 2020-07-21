@@ -18,29 +18,39 @@ export default StyleSheet.create({
         marginLeft: 10,
     },
     topContainer: {
-        height: SCREEN_HEIGHT * .13,
+        height: SCREEN_HEIGHT * .15,
         backgroundColor: '#F2AC29',
         justifyContent: "center",
     },
     infoUserContainer: {
-        flex: .4,
+        flex: 1,
+        marginTop: 20,
         marginLeft: 20,
     },
-    iconBackContainer: {
-        flex: .2,
-        alignSelf: "flex-end",
-        marginRight: 20
-    },
-    iconBack: {
-        width: 30,
+    search: {
+        padding: 10,
+        backgroundColor: '#fff',
+        opacity: .4,
+        width: 375,
         height: 30,
-        marginRight: 2
+        alignSelf: 'flex-start',
+        marginTop: 18,
+        borderRadius: 10
+    },
+    titleProducts: {
+        marginTop: 15,
+        marginBottom: 15,
+        marginLeft: 10,
+    },
+    titleProductsText: {
+        fontSize: 18
     },
     addresText: {
         color: '#0D0D0D',
         fontFamily: "Comfortaa-Bold",
         fontSize: 16,
         marginBottom: 5,
+        marginTop: 5
     },
     addressCompleteText: {
         color: '#434259',
@@ -62,4 +72,7 @@ export default StyleSheet.create({
         elevation: 5,
         alignSelf: "center"
     },
+    list: {
+        marginBottom: 20
+    }
 });

@@ -74,11 +74,11 @@ export default function Home({ navigation }) {
                             <TextInput
                                 style={styles.inputAdress}
                                 placeholder="Rua Pamplona, 200, Jardim Paulista"
-                                onChangeText={(addressInput) => {   // devo atualizar o addressFromUser aqui
+                                onChangeText={(addressInput) => {   
                                     setAddressInput(addressInput);
                                 }} />
                             <Text style={styles.subtitleInput}>Insira o seu endereço</Text>
-                            <TouchableOpacity onPress={() => {
+                            <TouchableOpacity disabled={isLoading} activeOpacity onPress={() => {
                                 getLocation(addressInput);
                                 navigation.navigate('Products')
                             }}>

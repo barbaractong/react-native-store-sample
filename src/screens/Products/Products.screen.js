@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { 
 	View, 
 	Text, 
+	TextInput,
 	Image, 
 	List,
 	FlatList, 
@@ -12,6 +13,7 @@ import {
 import { createApolloFetch } from 'apollo-fetch'; 
 
 import ItemCardComponent from '../../components/ItemCard/ItemCard.component'
+import Carousel from '../../components/Carousel/Carousel.component';
 
 import AddressContext from '../../../context/AddressInput.context';
 import LocationContext from '../../../context/Location.context';
@@ -25,11 +27,16 @@ import * as SERVICES from '../../services/apollo'
 import styles from './Products.screen.styles'
 
 const PROD_RESPONSE =  require('../../mocks/productsData.json');
+const CAROUSEL_DATA = require('../../mocks/carouselData.json')
 
 const uri = 'https://api.code-challenge.ze.delivery/public/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
+const ICON_BACK = require('../../assets/icons/volte.png')
+
 export default function Products() {
+	console.disableYellowBox = true;
+	
 	[addressResponse, setAddressResponse] = useState({pocSearch: []});
 	[userAddressId, setUserAddressId] = useState({});
 
@@ -38,6 +45,8 @@ export default function Products() {
 	[productsList, setProductList] = useState()
 
 	useEffect(() => {
+		let isAddressSubscribed = true;
+
 		apolloFetch({ 
 			query: QUERY.ADDRESS_QUERY, 
 			variables: {
@@ -48,20 +57,23 @@ export default function Products() {
 			}})
 		  	.then(result => {
 				const { data, errors, extensions } = result;
-				setAddressResponse(data)				
+				isAddressSubscribed ? setAddressResponse(data) : null	
 			})
 			.then(() => {
-				setUserAddressId(addressResponse.pocSearch);
+				isAddressSubscribed ? setUserAddressId(addressResponse.pocSearch) : null;
 			})
 			.then(() => {
-				userAddressId.map(v => setId(v.id))
+				isAddressSubscribed ? userAddressId.map(v => setId(v.id)) : null
+				console.log(id)
 			})
 			.catch(error => {
 				console.log(error)
 			  });
+		return () => isAddressSubscribed = false;
 	}, [])
 
 	useEffect(() => {
+		let isProductListSubscribed = true;
 		if (id !== 0){
 			apolloFetch({ 
 				query: QUERY.PRODUCT_LIST_QUERY, 
@@ -72,47 +84,55 @@ export default function Products() {
 				}})
 				  .then(result => {
 					const { data, errors, extensions } = result;
-					setProductList(data.poc.products)
-					// console.log(productsList)
+					isProductListSubscribed ? setProductList(data.poc.products.splice(1, 5)) : null
+					productsList;
 				})
 				.catch(error => {
 					console.log(error)
 				  });
+		return () => isProductListSubscribed = false;
 	}
-	}, [])
+	}, [productsList])
 
-	const newData = productsList //PROD_RESPONSE.data.poc.products;
+	;
+
+	 //PROD_RESPONSE.data.poc.products;
 	
 	const addressFromUser = useContext(AddressContext)[0];
 	const locationFromAPI = useContext(LocationContext)[0];
 
 	const [userData, setUserData] = useState({});
 	const [userID, setUserID] = useState('')
+
+	const  newData = productsList;
 	
 	return (
 	<View style={styles.container}>
-		<ScrollView>
-			<View style={styles.topContainer}>
+		<View style={styles.topContainer}>
 				<View style={styles.infoUserContainer}>
 					<Text style={styles.addresText}>Endereço</Text>
 					<Text style={styles.addressCompleteText}>{addressFromUser}</Text>
+					<TextInput placeholder = "Pesquisar" style = {styles.search}/>
 				</View>
-			</View>
-			
-			<View style={styles.cardView}>
+		</View>
+		<ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.carouselContainer}>
+                    <Carousel data={CAROUSEL_DATA.data} />
+                </View>
+			<View style = {styles.titleProducts}>
+				<Text style = {styles.titleProductsText}>Principais produtos</Text>
         	</View>
-			<FlatList
-				horizontal
-				showsHorizontalScrollIndicator={false}
-				data={productsList}
-				renderItem={({ item }) => (
-					<ItemCardComponent item = {item} />
-				)}
-				keyExtractor={prod => prod.id}
-				
-			/>
-			<View style={styles.cardView}>
-				
+			<View style = {styles.list}>
+				<FlatList
+					horizontal
+					showsHorizontalScrollIndicator={false}
+					data={productsList}
+					renderItem={({ item }) => (
+						<ItemCardComponent item = {item} />
+					)}
+					keyExtractor={prod => prod.id}
+					
+				/>
 			</View>
 		</ScrollView>
 	</View>

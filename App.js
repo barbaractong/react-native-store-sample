@@ -29,6 +29,7 @@ export default function App() {
                   component={Home}
                   options={{
                     title: 'Home',
+                    headerShown: false,
                     headerStyle: {
                       backgroundColor: '#fff',
                     },
@@ -41,7 +42,7 @@ export default function App() {
                   name='Products'
                   component={Products}
                   options={{
-                    title: 'Bebidas disponíveis',
+                    title: 'Delivery',
                     headerStyle: {
                       backgroundColor: '#fff',
                     },
