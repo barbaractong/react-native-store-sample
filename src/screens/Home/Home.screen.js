@@ -34,12 +34,12 @@ export default function Home({ navigation }) {
     const [isLoading, setLoading] = useState(true);
 
     const [coordinates, setCoordinates] = useContext(LocationContext)
+
     useEffect(() => {
         fetch(geolocationLink)
             .then((response) => response.json())
             .then((json) => setResponseData(json.results))
-            .then( (data) => {
-                console.log(data);
+            .then( () => {
                 responseData.map((value) => {
                     setCoordinates({
                         address: addressInput,
@@ -53,7 +53,7 @@ export default function Home({ navigation }) {
             .finally(() => {
                 setLoading(false);
             });
-    }, [responseData]);
+    }, [responseData, coordinates]);
 
     return (
         <KeyboardAvoidingView

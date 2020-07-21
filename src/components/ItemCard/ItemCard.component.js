@@ -2,12 +2,30 @@ import React from 'react'
 import { View, Text, Dimensions, StyleSheet, Image } from 'react-native'
 
 export default function ItemCardComponent({ item }) {
+    const prodVariant = {};
+    const urlData = {};
+
+    function checkIfImageIsAvaliable(url) {
+        fetch(url)
+        .then(() => urlData.url = url)
+        .catch( err => urlData.url = 'https://www.vermeer.com.au/wp-content/uploads/2016/12/attachment-no-image-available-600x600.png')
+    }
+
+    item.images.map( i => urlData.url = i.url);
+
+    item.productVariants.map( info => {
+        prodVariant.price = info.price;
+        prodVariant.subtitle = info.subtitle;
+    });
+
+    const noImage = ''
+    
     return (
         <View style={styles.cardView}>
-            <Image style={styles.image} source={{ uri: item.url }} />
+            <Image style={styles.image} source={{ uri: urlData.url}} />
             <View style={styles.textView}>
                 <Text style={styles.itemTitle}> {item.title}</Text>
-                <Text style={styles.itemDescription}>{item.description}</Text>
+                <Text style={styles.itemDescription}>{`R$${prodVariant.price}`}</Text>
             </View>
         </View>
     )

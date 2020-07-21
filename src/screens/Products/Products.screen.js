@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { 
 	View, 
 	Text, 
 	Image, 
+	List,
 	FlatList, 
 	ScrollView, 
 	Alert, 
@@ -10,34 +11,31 @@ import {
 
 import { useQuery } from '@apollo/react-hooks';
 
-import Carousel from '../../components/Carousel/Carousel.component';
 import ItemCardComponent from '../../components/ItemCard/ItemCard.component'
 
 import AddressContext from '../../../context/AddressInput.context';
 import LocationContext from '../../../context/Location.context';
 
+import productsResponse from '../../mocks/get-products'
+
+import * as getLocationCoord from '../../services/geolocation-api/getGeolocation.service';
+import * as QUERY from '../../services/query/query';
+
 import styles from './Products.screen.styles'
 
-
-const CAROUSEL_DATA = require('../../mocks/carouselData.json')
-
-const data = {
-	url: 'https://static.clubeextra.com.br/img/uploads/1/991/584991.jpg',
-	title: 'Skol 269ml - Unidade',
-	description: 'Cervejas',
-	id: 1
-}
-
+const PROD_RESPONSE =  require('../../mocks/productsData.json');
 
 
 export default function Products() {
+
+	const newData = PROD_RESPONSE.data.poc.products;
+	
 	const addressFromUser = useContext(AddressContext)[0];
 	const locationFromAPI = useContext(LocationContext)[0];
 
-	useEffect(() => {
-		
-	}, [])
-
+	const [userData, setUserData] = useState({});
+	const [userID, setUserID] = useState('')
+	
 	return (
 	<View style={styles.container}>
 		<ScrollView>
@@ -45,14 +43,25 @@ export default function Products() {
 				<View style={styles.infoUserContainer}>
 					<Text style={styles.addresText}>Endereço</Text>
 					<Text style={styles.addressCompleteText}>{addressFromUser}</Text>
-					<Text style={styles.addressCompleteText}>Location: </Text>
 				</View>
 			</View>
-			<View style={styles.carouselContainer}>
-				<Carousel data={CAROUSEL_DATA.data} />
+			
+			<View style={styles.cardView}>
+				
+        	</View>
+			<FlatList
+				horizontal
+				showsHorizontalScrollIndicator={false}
+				data={newData}
+				renderItem={({ item }) => (
+					<ItemCardComponent item = {item} />
+				)}
+				keyExtractor={prod => prod.id}
+				
+			/>
+			<View style={styles.cardView}>
+				
 			</View>
-			<ItemCardComponent item={data} />
-			<ItemCardComponent item={data} />
 		</ScrollView>
 	</View>
 	)

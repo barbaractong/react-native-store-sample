@@ -18,14 +18,13 @@ export default StyleSheet.create({
         marginLeft: 10,
     },
     topContainer: {
-        height: SCREEN_HEIGHT * .15,
+        height: SCREEN_HEIGHT * .13,
         backgroundColor: '#F2AC29',
         justifyContent: "center",
     },
     infoUserContainer: {
-        flex: .2,
+        flex: .4,
         marginLeft: 20,
-        alignSelf: "flex-start",
     },
     iconBackContainer: {
         flex: .2,
@@ -47,5 +46,20 @@ export default StyleSheet.create({
         color: '#434259',
         fontFamily: "Comfortaa-Medium",
         fontSize: 14,
-    }
+    },
+    cardView: {
+        flex: 1,
+        marginTop: 30,
+        marginBottom: 20, 
+        width: SCREEN_WIDTH - 30,
+        height: SCREEN_HEIGHT / 3,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0.5, height: 0.5 },
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        elevation: 5,
+        alignSelf: "center"
+    },
 });
