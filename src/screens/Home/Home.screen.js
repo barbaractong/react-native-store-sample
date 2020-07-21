@@ -53,7 +53,7 @@ export default function Home({ navigation }) {
             .finally(() => {
                 setLoading(false);
             });
-    }, [responseData, coordinates]);
+    }, []);
 
     return (
         <KeyboardAvoidingView

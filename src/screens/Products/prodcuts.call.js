@@ -1,3 +1,26 @@
+import { createApolloFetch } from 'apollo-fetch';
+import * as QUERY from '../../services/query/query';
+
+const uri = 'https://api.code-challenge.ze.delivery/public/graphql';
+const apolloFetch = createApolloFetch({ uri });
+
+const fetchAddressQuery = () => {
+	apolloFetch({ 
+		query: QUERY.ADDRESS_QUERY, 
+		variables: {now: "2017-08-01T20:00:00.000Z", 
+		algorithm: "NEAREST", 
+		lat: "-23.632919", 
+		long: "-46.699453"}, 
+	  })
+	  .then(result => {
+		const { data, errors, extensions } = result;
+		console.log(data)
+	  })
+	  .catch(error => {
+		console.log(error)
+	  });
+}
+
 /*
 	useEffect(() => {
 		console.log('entrou no fetch de info do endereco')
