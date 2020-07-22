@@ -62,6 +62,7 @@
    
   - Implement optimized and correct way lifecycle hooks
   - Fix carousel card's render and automate it
+  - If a image url is broken, set a deafult image for the product
   - Implement filter functionality
     - Create query the calls a response with products category
   - Implement validations at buttons, filters and query's request
