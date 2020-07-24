@@ -54,16 +54,11 @@
       
   - Products screen issues with GraphQL query
     - Use mocks to call the API that returns the ID from user address;
-    - Issues with useEffect hook: The first render for some reason don't set the variable productsList in the right way while react lifecycle. The user needs to re-render the screen to se the cards with the products.
-    - *FlatList* renders just the first 5 itens
-      - Needs to implement a 'see more' button to show other itens
+    - Issues with useEffect hook: long timeout to render the cards;
+    - *FlatList* renders just the first 5 itens for optimize the rendering;
       
    ## Future implementations for this project
-   
-  - Implement optimized and correct way lifecycle hooks
-  - Fix carousel card's render and automate it
+  
+  - Fix carousel (automate it)
   - If a image url is broken, set a deafult image for the product
-  - Implement filter functionality
-    - Create query the calls a response with products category
-  - Implement validations at buttons, filters and query's request
   - Implement e2e testing and automatize tests
